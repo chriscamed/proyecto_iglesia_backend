@@ -13,7 +13,7 @@ user.getUserById = function(id,callback)
 	
     if (mysqlConnection) 
 	{    
-    mysqlConnection.query('SELECT * FROM user where id = ?',[id],(err, rows, fields) =>{
+    mysqlConnection.query('SELECT * FROM users where ID_USER = ?',[id],(err, rows, fields) =>{
         if(!err){
            
             callback(null, rows[0]);
@@ -34,7 +34,7 @@ user.getUserLogin = async function(usuario, callback)
     if (mysqlConnection) 
 	{
            
-    mysqlConnection.query('SELECT * FROM user where USUARIO = ? ',[usuario],(err, rows, fields) =>{
+    mysqlConnection.query('SELECT * FROM USERS where USUARIO = ? ',[usuario],(err, rows, fields) =>{
         if(!err){
             
                             callback(null, rows[0]);
@@ -53,7 +53,7 @@ user.getListUser = async function( callback)
     if (mysqlConnection) 
 	{
            
-    mysqlConnection.query('SELECT * FROM user',(err, rows, fields) =>{
+    mysqlConnection.query('SELECT * FROM USERS',(err, rows, fields) =>{
         if(!err){
             callback(null, rows);
             
@@ -71,7 +71,7 @@ user.insertUsuario = async function(UsuarioData,callback)
 {
     const hashPassword =  await bcrypt.hashSync(UsuarioData.body.PASS, 10);
        
-    mysqlConnection.query('INSERT INTO user SET USUARIO = ?, PASS = ?, ROL = ?', [UsuarioData.body.USUARIO, hashPassword,UsuarioData.body.ROL],(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO USERS SET USUARIO = ?, PASS = ?, ROL = ?, ESTADO = ?', [UsuarioData.body.USUARIO, hashPassword,UsuarioData.body.ROL,UsuarioData.body.ESTADO],(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
@@ -92,7 +92,7 @@ user.updateUsuario = async function(UsuarioData,callback)
 {
     const hashPassword =  await bcrypt.hashSync(UsuarioData.body.PASS, 10);
        
-    mysqlConnection.query('UPDATE user SET USUARIO = ?, PASS = ?, ROL = ? where id = ?', [UsuarioData.body.USUARIO, hashPassword,UsuarioData.body.ROL,UsuarioData.body.id],(err, rows, fields) =>{
+    mysqlConnection.query('UPDATE USERS SET USUARIO = ?, PASS = ?, ROL = ?, ESTADO = ? where ID_USER = ?', [UsuarioData.body.USUARIO, hashPassword,UsuarioData.body.ROL,UsuarioData.body.ESTADO,UsuarioData.body.id],(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,

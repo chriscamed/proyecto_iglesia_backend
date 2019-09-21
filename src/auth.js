@@ -60,7 +60,7 @@ const auth = {
                 
 
                 const [newToken] = await auth.getToken({id: datos.ID_USUARIO, user: datos.USUARIO, rol: datos.ROL}, process.env.SECRET);
-
+                console.log([newToken]);
         
                 return{
                     success: true,
