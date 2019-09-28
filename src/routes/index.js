@@ -733,7 +733,8 @@ router.get('/ministerio/:id', checkAuth,function (request, response) {
 //insertar ministerio
 router.post('/ministerio/crear', checkAuth,function (request, response) {
   if (request.userData.roll >= 1) {
-  ministeriosModel.insertMinisterio(request, function (error, datos) {
+    
+    ministeriosModel.insertMinisterio(request, function (error, datos) {
 
     if (datos) {
       response.status(200).json(datos);

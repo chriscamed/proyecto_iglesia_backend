@@ -46,9 +46,8 @@ ministerios.getMinisterioById = function(id,callback)
 //Añadir un nuevo usuario
 ministerios.insertMinisterio = function(MinisterioData,callback)
 {
-        
     //mysqlConnection.query('INSERT INTO ministerio SET ?', MinisterioData.body,(err, rows, fields) =>{
-    mysqlConnection.query('INSERT INTO MINISTERIOS SET ?', MinisterioData.body,(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO MINISTERIOS SET ?', MinisterioData.body.ministerio,(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
@@ -58,7 +57,7 @@ ministerios.insertMinisterio = function(MinisterioData,callback)
         }else{
             callback(null, {
                 success: false,
-                errors: {err}
+                errors: {err}                
             });
         }
     });
