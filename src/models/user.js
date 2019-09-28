@@ -71,7 +71,7 @@ user.insertUsuario = async function(UsuarioData,callback)
 {
     const hashPassword =  await bcrypt.hashSync(UsuarioData.body.PASS, 10);
        
-    mysqlConnection.query('INSERT INTO USERS SET USUARIO = ?, PASS = ?, ROL = ?, ESTADO = ?', [UsuarioData.body.USUARIO, hashPassword,UsuarioData.body.ROL,UsuarioData.body.ESTADO],(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO USERS SET ID_PERSONA = ?, USUARIO = ?, PASS = ?, ROL = ?, ESTADO = ?', [UsuarioData.body.ID_PERSONA, UsuarioData.body.USUARIO, hashPassword,UsuarioData.body.ROL,UsuarioData.body.ESTADO],(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
