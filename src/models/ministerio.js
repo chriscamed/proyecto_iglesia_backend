@@ -47,7 +47,7 @@ ministerios.getMinisterioById = function(id,callback)
 ministerios.insertMinisterio = function(MinisterioData,callback)
 {
     //mysqlConnection.query('INSERT INTO ministerio SET ?', MinisterioData.body,(err, rows, fields) =>{
-    mysqlConnection.query('INSERT INTO MINISTERIOS SET ?', MinisterioData.body.ministerio,(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO MINISTERIOS SET ?', MinisterioData.body,(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
