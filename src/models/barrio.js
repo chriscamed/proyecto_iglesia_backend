@@ -11,7 +11,7 @@ barrios.getbarrios = function(callback)
 {
 	if (mysqlConnection) 
 	{
-		mysqlConnection.query('SELECT * FROM barrio', function(error, rows) {
+		mysqlConnection.query('SELECT * FROM BARRIOS', function(error, rows) {
 			if(error)
 			{
 				throw error;
@@ -30,7 +30,7 @@ barrios.getBarrioById = function(id,callback)
 	
     if (mysqlConnection) 
 	{    
-    mysqlConnection.query('SELECT * FROM barrio where ID_BARRIO = ?',[id],(err, rows, fields) =>{
+    mysqlConnection.query('SELECT * FROM BARRIOS where ID_BARRIO = ?',[id],(err, rows, fields) =>{
         if(!err){
            
             callback(null, rows[0]);
@@ -46,7 +46,7 @@ barrios.getBarrioById = function(id,callback)
 barrios.insertBarrio = function(BarrioData,callback)
 {
         
-    mysqlConnection.query('INSERT INTO barrio SET ?', BarrioData.body,(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO BARRIOS SET ?', BarrioData.body,(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
@@ -68,7 +68,7 @@ barrios.updateBarrio = function(req, callback)
 {
     const {ID_BARRIO, BARRIO, COMUNA, ESTRATO} = req.body;
   
-    const query ='UPDATE barrio SET BARRIO  = ?, COMUNA = ?, ESTRATO = ? WHERE ID_BARRIO = ?';
+    const query ='UPDATE BARRIOS SET BARRIO  = ?, COMUNA = ?, ESTRATO = ? WHERE ID_BARRIO = ?';
 
     mysqlConnection.query(
         query, [BARRIO, COMUNA, ESTRATO, ID_BARRIO],(err, rows, fields) =>{
@@ -92,7 +92,7 @@ barrios.updateBarrio = function(req, callback)
 barrios.deleteBarrio = function(id, callback)
 {
    
-    mysqlConnection.query('DELETE FROM barrio WHERE ID_BARRIO = ?',[id],(err, rows, fields) =>{
+    mysqlConnection.query('DELETE FROM BARRIOS WHERE ID_BARRIO = ?',[id],(err, rows, fields) =>{
     if(!err){
         callback(null, {
             success:true,
