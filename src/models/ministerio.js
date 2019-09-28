@@ -7,6 +7,24 @@ const mysqlConnection = require('../database');
 var ministerios = {};
  
 //Obtenemos todos los usuarios
+//Obtenemos todos los usuarios
+ministerios.getMinisterios = function(callback)
+{
+    if (mysqlConnection) 
+    {
+        mysqlConnection.query('SELECT * FROM MINISTERIOS', function(error, rows) {
+            if(error)
+            {
+                throw error;
+            }
+            else
+            {
+                callback(null, rows);
+            }
+        });
+    }
+}
+
 ministerios.getMinisterioById = function(id,callback)
 {
     
