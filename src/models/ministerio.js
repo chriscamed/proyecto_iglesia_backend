@@ -7,30 +7,13 @@ const mysqlConnection = require('../database');
 var ministerios = {};
  
 //Obtenemos todos los usuarios
-ministerios.getMinisterios = function(callback)
-{
-	if (mysqlConnection) 
-	{
-		mysqlConnection.query('SELECT * FROM ministerio', function(error, rows) {
-			if(error)
-			{
-				throw error;
-			}
-			else
-			{
-				callback(null, rows);
-			}
-		});
-	}
-}
- 
-//Obtenemos un usuario por su id
 ministerios.getMinisterioById = function(id,callback)
 {
-	
+    
     if (mysqlConnection) 
-	{    
-    mysqlConnection.query('SELECT * FROM ministerio where ID_MINISTERIO = ?',[id],(err, rows, fields) =>{
+    {    
+    //mysqlConnection.query('SELECT * FROM ministerio where ID_MINISTERIO = ?',[id],(err, rows, fields) =>{
+    mysqlConnection.query('SELECT * FROM MINISTERIOS where ID_MINISTERIO = ?',[id],(err, rows, fields) =>{
         if(!err){
            
             callback(null, rows[0]);
@@ -46,7 +29,8 @@ ministerios.getMinisterioById = function(id,callback)
 ministerios.insertMinisterio = function(MinisterioData,callback)
 {
         
-    mysqlConnection.query('INSERT INTO ministerio SET ?', MinisterioData.body,(err, rows, fields) =>{
+    //mysqlConnection.query('INSERT INTO ministerio SET ?', MinisterioData.body,(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO MINISTERIOS SET ?', MinisterioData.body,(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
@@ -68,7 +52,8 @@ ministerios.updateMinisterio = function(req, callback)
 {
     const {ID_MINISTERIO, NOMBRE} = req.body;
   
-    const query ='UPDATE ministerio SET NOMBRE  = ? WHERE ID_MINISTERIO = ?';
+    //const query ='UPDATE ministerio SET NOMBRE  = ? WHERE ID_MINISTERIO = ?';
+    const query ='UPDATE MINISTERIOS SET NOMBRE  = ? WHERE ID_MINISTERIO = ?';
 
     mysqlConnection.query(
         query, [NOMBRE, ID_MINISTERIO],(err, rows, fields) =>{
@@ -92,7 +77,8 @@ ministerios.updateMinisterio = function(req, callback)
 ministerios.deleteMinisterio = function(id, callback)
 {
    
-    mysqlConnection.query('DELETE FROM ministerio WHERE ID_MINISTERIO = ?',[id],(err, rows, fields) =>{
+    //mysqlConnection.query('DELETE FROM ministerio WHERE ID_MINISTERIO = ?',[id],(err, rows, fields) =>{
+    mysqlConnection.query('DELETE FROM MINISTERIOS WHERE ID_MINISTERIO = ?',[id],(err, rows, fields) =>{
     if(!err){
         callback(null, {
             success:true,
@@ -106,6 +92,6 @@ ministerios.deleteMinisterio = function(id, callback)
     }
 });
 
-			
+            
 }
 module.exports = ministerios;
