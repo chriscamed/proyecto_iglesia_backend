@@ -42,6 +42,23 @@ personas.getPersonaById = function(id,callback)
 
 }
 
+personas.getMembers = function(callback)
+{
+    
+    if (mysqlConnection) 
+    {    
+    mysqlConnection.query('SELECT * FROM PERSONAS p WHERE p.ID_PERSONA NOT IN (SELECT ID_PERSONA FROM USERS)',(err, rows) =>{
+        if(!err){
+           
+            callback(null, rows);
+        }else{
+            throw err;
+        }
+    });
+}
+
+}
+
 
 personas.getPersonaByIdHuman = function(id,callback)
 {

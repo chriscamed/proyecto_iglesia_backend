@@ -166,6 +166,9 @@ router.get('/user/alluser', checkAuth, function (request, response) {
   }
 });
 
+
+
+
 router.post('/user/update', checkAuth, function (request, response) {
 
   if (request.userData.roll == 1) {
@@ -257,6 +260,27 @@ router.get('/persona/simple/:id', checkAuth, function (request, response) {
       });
     }
   });
+});
+
+router.get('/persona/members/all', checkAuth, function (request, response) {
+  if (request.userData.roll == 1) {
+    personasModel.getMembers( function (error, datos) {
+
+      if (datos) {
+        response.status(200).json(datos);
+      }
+      else {
+        response.status(500).json(datos);
+      }
+    });
+
+  } else {
+    response.status(401).json(
+      {
+        message: 'No autorizado'
+      }
+    )
+  }
 });
 
 
