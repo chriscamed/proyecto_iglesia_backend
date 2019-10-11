@@ -90,9 +90,9 @@ user.insertUsuario = async function(UsuarioData,callback)
 
 user.updateUsuario = async function(UsuarioData,callback)
 {
-    const hashPassword =  await bcrypt.hashSync(UsuarioData.body.PASS, 10);
+    const hashPassword =  await bcrypt.hashSync(UsuarioData.body.PASSWORD, 10);
        
-    mysqlConnection.query('UPDATE USERS SET PASS = ?, ROL = ?, ESTADO = ? where ID_USER = ?', [hashPassword,UsuarioData.body.ROL,UsuarioData.body.ESTADO,UsuarioData.body.id],(err, rows, fields) =>{
+    mysqlConnection.query('UPDATE USERS SET PASS = ?, ROL = ?, ESTADO = ? where ID_USER = ?', [hashPassword,UsuarioData.body.ROL,UsuarioData.body.ESTADO,UsuarioData.body.USER_ID],(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
