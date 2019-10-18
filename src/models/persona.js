@@ -168,7 +168,7 @@ personas.updatePersona = function(req, callback)
 {
 	
 	const { 
-        ID_MIEMBRO,
+        ID_PERSONA,
         PRIMER_NOMBRE,
         SEGUND_NOMBRE, 
         PRIMER_APELLIDO, 
@@ -176,28 +176,29 @@ personas.updatePersona = function(req, callback)
         IDENTIFICACION, 
         TIPO_IDENTIFICACION, 
         FECHA_NACIMIENTO,
+        GENERO,
         ESTADO_CIVIL,
         CORREO,
-        CELULAR1,
-        CELULAR2,
+        CELULAR_1,
+        CELULAR_2,
         TELEFONO_FIJO,
         DIRECCION_CASA,
         EMPRESA,
-        TELEFONO_EXT,
+        TELEFONO_EMPRESA,
         FECHA_BAUTIZO,
-        OCUPACION,
-        BARRIO,
-        PROFESION,
-        ESTADO,
-        MINISTERIO} = req;
+        ID_OCUPACION,
+        ID_BARRIO,
+        ID_PROFESION,
+        ID_MINISTERIO} = req;
 
 
         
   
  const query =`UPDATE PERSONAS SET PRIMER_NOMBRE = ?, SEGUND_NOMBRE = ?, PRIMER_APELLIDO = ?, SEGUND_APELLIDO = ?, 
  IDENTIFICACION = ?, TIPO_IDENTIFICACION = ?, FECHA_NACIMIENTO = ?, GENERO = ?, ESTADO_CIVIL = ?, 
- CORREO = ?, CELULAR1 = ?, CELULAR2 = ?, TELEFONO_FIJO = ?, DIRECCION_CASA = ?, EMPRESA = ?, 
- TELEFONO_EXT = ?, FECHA_BAUTIZO = ?, OCUPACION = ?, BARRIO = ?, PROFESION = ?, ESTADO = ?, MINISTERIO = ? WHERE ID_MIEMBRO = ?`
+ CORREO = ?, CELULAR_1 = ?, CELULAR_2 = ?, TELEFONO_FIJO = ?, DIRECCION_CASA = ?, EMPRESA = ?, 
+ TELEFONO_EMPRESA = ?, FECHA_BAUTIZO = ?, ID_OCUPACION = ?, ID_BARRIO = ?, ID_PROFESION = ?, 
+ ID_MINISTERIO = ? WHERE ID_PERSONA = ?`
  
 
     mysqlConnection.query(
@@ -211,18 +212,18 @@ personas.updatePersona = function(req, callback)
             GENERO,
             ESTADO_CIVIL,
             CORREO,
-            CELULAR1,
-            CELULAR2,
+            CELULAR_1,
+            CELULAR_2,
             TELEFONO_FIJO,
             DIRECCION_CASA,
             EMPRESA,
-            TELEFONO_EXT,
+            TELEFONO_EMPRESA,
             FECHA_BAUTIZO,
-            OCUPACION,
-            BARRIO,
-            PROFESION,
+            ID_OCUPACION,
+            ID_BARRIO,
+            ID_PROFESION,
             ESTADO,
-            MINISTERIO, ID_MIEMBRO],(err, rows, fields) =>{
+            ID_MINISTERIO, ID_PERSONA],(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
