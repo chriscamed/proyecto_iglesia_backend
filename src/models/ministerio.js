@@ -70,10 +70,10 @@ ministerios.updateMinisterio = function(req, callback)
     const {ID_MINISTERIO, NOMBRE} = req.body;
   
     //const query ='UPDATE ministerio SET NOMBRE  = ? WHERE ID_MINISTERIO = ?';
-    const query ='UPDATE MINISTERIOS SET NOMBRE  = ? WHERE ID_MINISTERIO = ?';
+    const query ='UPDATE MINISTERIOS SET NOMBRE  = ?, ESTADO = ? WHERE ID_MINISTERIO = ?';
 
     mysqlConnection.query(
-        query, [NOMBRE, ID_MINISTERIO],(err, rows, fields) =>{
+        query, [NOMBRE, ESTADO, ID_MINISTERIO],(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
