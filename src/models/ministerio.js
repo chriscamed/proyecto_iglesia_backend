@@ -67,7 +67,7 @@ ministerios.insertMinisterio = function(MinisterioData,callback)
 //Actualizar un usuario
 ministerios.updateMinisterio = function(req, callback)
 {
-    const {ID_MINISTERIO, NOMBRE} = req.body;
+    const {DESCRIPCION, ESTADO, IDENTIFICACION, ID_MINISTERIO, NOMBRE} = req.body;
   
     //const query ='UPDATE ministerio SET NOMBRE  = ? WHERE ID_MINISTERIO = ?';
     const query ='UPDATE MINISTERIOS SET NOMBRE  = ?, ESTADO = ? WHERE ID_MINISTERIO = ?';
