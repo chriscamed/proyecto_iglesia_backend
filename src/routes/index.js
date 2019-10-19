@@ -295,19 +295,19 @@ router.get('/imagen/:id', checkAuth,function (request, response) {
 //insertar usuario
 router.post('/persona/crear', checkAuth, upload.single('fotopersona'), function (request, response) {
   if (request.userData.roll >= 1) {
-  var persona = JSON.parse(request.body.persona);
-  if (persona.fotopersona != null) {
-    persona.fotopersona = persona.IDENTIFICACION + request.file.originalname;
-  }
-  personasModel.insertPersona(persona, function (error, datos) {
+    var persona = request.body.persona;
+    if (persona.fotopersona != null) {
+      persona.fotopersona = persona.IDENTIFICACION + request.file.originalname;
+    }
+    personasModel.insertPersona(persona, function (error, datos) {
 
-    if (datos) {
-      response.status(200).json(datos);
-    }
-    else {
-      response.status(500).json(datos);
-    }
-  });
+      if (datos) {
+        response.status(200).json(datos);
+      }
+      else {
+        response.status(500).json(datos);
+      }
+    });
 }else{
   response.status(401).json(
     {
