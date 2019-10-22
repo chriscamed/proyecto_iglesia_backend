@@ -53,7 +53,7 @@ user.getListUser = async function( callback)
     if (mysqlConnection) 
 	{
            
-    mysqlConnection.query('SELECT * FROM USERS',(err, rows, fields) =>{
+    mysqlConnection.query('SELECT * FROM USERS a INNER JOIN PERSONAS b ON a.ID_PERSONAS = b.ID_PERSONA',(err, rows, fields) =>{
         if(!err){
             callback(null, rows);
             
