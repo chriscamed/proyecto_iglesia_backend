@@ -11,7 +11,7 @@ eventos.getEventos = function(callback)
 {
 	if (mysqlConnection) 
 	{
-		mysqlConnection.query('SELECT * FROM eventos ORDER BY FECHA_EVENTO DESC', function(error, rows) {
+		mysqlConnection.query('SELECT * FROM EVENTOS ORDER BY FECHA_EVENTO DESC', function(error, rows) {
 			if(error)
 			{
 				throw error;
@@ -122,7 +122,7 @@ eventos.getEventoPaginate = function(offset, limit, callback)
 eventos.insertEvento = function(eventoData,callback)
 {
         
-    mysqlConnection.query('INSERT INTO eventos SET ?', eventoData.body,(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO EVENTOS SET ?', eventoData.body,(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
@@ -142,12 +142,12 @@ eventos.insertEvento = function(eventoData,callback)
 //Actualizar un usuario
 eventos.updateEventos = function(req, callback)
 {
-    const {ID_EVENTO, NOMBRE, FECHA_EVENTO, HORA_INICIO, HORA_FIN} = req.body;
+    const {ID_EVENTO, FECHA, HORA_INICIO, HORA_FIN} = req.body;
   
-    const query ='UPDATE eventos SET NOMBRE  = ?, FECHA_EVENTO = ?, HORA_INICIO = ?, HORA_FIN = ? WHERE ID_EVENTO = ?';
+    const query ='UPDATE eventos SET FECHA = ?, HORA_INICIO = ?, HORA_FIN = ? WHERE ID_EVENTO = ?';
 
     mysqlConnection.query(
-        query, [NOMBRE, FECHA_EVENTO, HORA_INICIO, HORA_FIN, ID_EVENTO],(err, rows, fields) =>{
+        query, [FECHA, HORA_INICIO, HORA_FIN, ID_EVENTO],(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
