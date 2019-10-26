@@ -11,7 +11,7 @@ eventos.getEventos = function(callback)
 {
 	if (mysqlConnection) 
 	{
-		mysqlConnection.query('SELECT * FROM EVENTOS ORDER BY FECHA DESC', function(error, rows) {
+		mysqlConnection.query('SELECT * FROM EVENTOS e INNER JOIN TIPOS_EVENTOS t ON e.ID_TIPO_EVENTO = t.ID_TIPO_EVENTO ORDER BY FECHA DESC', function(error, rows) {
 			if(error)
 			{
 				throw error;
