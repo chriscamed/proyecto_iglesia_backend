@@ -295,9 +295,9 @@ router.get('/imagen/:id', checkAuth,function (request, response) {
 //insertar usuario
 router.post('/persona/crear', checkAuth, upload.single('fotopersona'), function (request, response) {
   if (request.userData.roll >= 1) {
-    var persona = request.body.persona;
-    if (persona.fotopersona != null) {
-      persona.fotopersona = persona.IDENTIFICACION + request.file.originalname;
+    var persona = request.body;
+    if (persona["FOTO_PERSONA"] != null) {
+      persona["FOTO_PERSONA"] = persona.IDENTIFICACION + request.file.originalname;
     }
     personasModel.insertPersona(persona, function (error, datos) {
 
