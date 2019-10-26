@@ -135,10 +135,11 @@ personas.insertPersona = function(usuarioData,callback)
 
     
     const errores = Object.getOwnPropertyNames(objErrors);
+    console.log(usuarioData);
     
     if(errores.length <= 0 ){
         
-    mysqlConnection.query('INSERT INTO PERSONAS SET ?', usuarioData.body,(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO PERSONAS SET ?', usuarioData,(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
