@@ -822,7 +822,7 @@ router.delete('/ministerio/eliminar/:id',checkAuth, function (request, response)
 
 //Tipos de evento
 //Listar tipos de evento
-router.get('/tiposevento', checkAuth,function (request, response) {
+router.get('/tiposevento', checkAuth,function (request, response) { 
   eventosModel.getTiposEvento(function (error, data) {
     response.status(200).json(data);
   });
@@ -831,7 +831,7 @@ router.get('/tiposevento', checkAuth,function (request, response) {
 //Crear tipo de evento
 router.post('/tipoevento/crear', checkAuth,function (request, response) {
   if (request.userData.roll >= 1) {
-  eventosModel.insertTipoEvento(request, function (error, datos) {
+  eventosModel.insertTipoEvento(request.body, function (error, datos) {
 
     if (datos) {
       response.status(200).json(datos);

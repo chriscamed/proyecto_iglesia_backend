@@ -11,7 +11,7 @@ eventos.getEventos = function(callback)
 {
 	if (mysqlConnection) 
 	{
-		mysqlConnection.query('SELECT * FROM EVENTOS ORDER BY FECHA_EVENTO DESC', function(error, rows) {
+		mysqlConnection.query('SELECT * FROM EVENTOS ORDER BY FECHA DESC', function(error, rows) {
 			if(error)
 			{
 				throw error;
