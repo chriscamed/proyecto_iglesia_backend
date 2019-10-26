@@ -23,6 +23,47 @@ eventos.getEventos = function(callback)
 		});
 	}
 }
+
+//Obtenemos todos los tipos de evento
+eventos.getTiposEvento = function(callback)
+{
+	if (mysqlConnection) 
+	{
+		mysqlConnection.query('SELECT * FROM TIPOS_EVENTOS', function(error, rows) {
+			if(error)
+			{
+				throw error;
+			}
+			else
+			{
+				callback(null, rows);
+			}
+		});
+	}
+}
+
+//Creamos un tipo de evento
+eventos.insertTipoEvento = function(nombre,callback)
+{
+        
+    mysqlConnection.query('INSERT INTO TIPOS_EVENTOS SET ?', [nombre],(err, rows, fields) =>{
+        if(!err){
+            callback(null, {
+                success: true,
+                errors: null
+            });
+           
+        }else{
+            callback(null, {
+                success: false,
+                errors: {err}
+            });
+        }
+    });
+
+}
+
+
  
 //Obtenemos un usuario por su id
 eventos.getEventoById = function(id,callback)

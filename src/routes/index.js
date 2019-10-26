@@ -820,7 +820,35 @@ router.delete('/ministerio/eliminar/:id',checkAuth, function (request, response)
 
 });
 
+//Tipos de evento
+//Listar tipos de evento
+router.get('/tiposevento', checkAuth,function (request, response) {
+  eventosModel.getTiposEvento(function (error, data) {
+    response.status(200).json(data);
+  });
+});
 
+//Crear tipo de evento
+router.post('/tipoevento/crear', checkAuth,function (request, response) {
+  if (request.userData.roll >= 1) {
+  eventosModel.insertTipoEvento(request, function (error, datos) {
+
+    if (datos) {
+      response.status(200).json(datos);
+    }
+    else {
+      response.status(500).json(datos);
+    }
+  });
+}else{
+  response.status(401).json(
+    {
+      message: 'No autorizado'
+    }
+  ) 
+}
+
+});
 
 //crud Eventos 
 router.get('/eventos', checkAuth,function (request, response) {
@@ -1197,9 +1225,6 @@ router.get('/reportes/asistenciainvitados/', checkAuth, function (request, respo
 }
 
 });
-
-
-
 
 
 
