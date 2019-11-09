@@ -11,7 +11,7 @@ logisticas.getLogisticas = function(callback)
 {
 	if (mysqlConnection) 
 	{
-		mysqlConnection.query('SELECT l.*, CONCAT(m.PRIMER_NOMBRE," ",m.SEGUND_NOMBRE,m.PRIMER_APELLIDO , m.SEGUND_APELLIDO) as NOMBRE, e.NOMBRE as EVENTO_NOMBRE, DATE_FORMAT(e.FECHA_EVENTO,"%Y %m %d") as EVENTO_FECHA, e.HORA_INICIO  FROM logistica l, persona m, eventos e WHERE l.RESPONSABLE = m.ID_MIEMBRO AND e.ID_EVENTO = l.EVENTO ORDER BY EVENTO_FECHA', function(error, rows) {
+		mysqlConnection.query('SELECT concat(c.PRIMER_NOMBRE,c.SEGUND_NOMBRE,c.PRIMER_APELLIDO,c.SEGUND_APELLIDO) as persona, b.ACTIVIDAD, d.NOMBRE, a.FECHA, a.HORA_INICIO, a.HORA_FIN from eventos as a join logisticas as b on a.ID_EVENTO = b.id_evento JOIN personas as c on b.id_persona = c.id_persona JOIN tipos_eventos as d on a.ID_TIPO_EVENTO = d.ID_TIPO_EVENTO', function(error, rows) {
 			if(error)
 			{
 				throw error;
@@ -23,14 +23,14 @@ logisticas.getLogisticas = function(callback)
 		});
 	}
 }
- 
+
 //Obtenemos un asistencia por su id
 logisticas.getLogisticaById = function(id,callback)
 {
 	
     if (mysqlConnection) 
 	{    
-    mysqlConnection.query('SELECT * FROM logistica where ID_LOGISTICA = ?',[id],(err, rows, fields) =>{
+    mysqlConnection.query('SELECT concat(c.PRIMER_NOMBRE,c.SEGUND_NOMBRE,c.PRIMER_APELLIDO,c.SEGUND_APELLIDO) as persona, b.ACTIVIDAD, d.NOMBRE, a.FECHA, a.HORA_INICIO, a.HORA_FIN from eventos as a join logisticas as b on a.ID_EVENTO = b.id_evento JOIN personas as c on b.id_persona = c.id_persona JOIN tipos_eventos as d on a.ID_TIPO_EVENTO = d.ID_TIPO_EVENTO where a.ID_EVENTO = ?',[id],(err, rows, fields) =>{
         if(!err){
            
             callback(null, rows[0]);
@@ -42,11 +42,15 @@ logisticas.getLogisticaById = function(id,callback)
 
 }
 
-//Añadir un nuevo asistencia
-logisticas.insertLogistica = function(asistenciaData,callback)
+
+
+//Métodos para actualizar logisticas
+
+//Agregar logisticas a evento
+logisticas.insertLogistica = function(logisticaData,callback)
 {
         
-    mysqlConnection.query('INSERT INTO logistica SET ?', asistenciaData.body,(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO LOGISTICAS SET ?', logisticaData.body,(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
@@ -63,11 +67,11 @@ logisticas.insertLogistica = function(asistenciaData,callback)
 
 }
 
-//Eliminar un asistencia por su id
-logisticas.deleteLogistica = function(id, callback)
+//Metodo para borrar persona de logistica
+logisticas.updateLogistica = function(id, callback)
 {
-   
-    mysqlConnection.query('DELETE FROM logistica WHERE ID_LOGISTICA = ?',[id],(err, rows, fields) =>{
+    
+    mysqlConnection.query('DELETE FROM LOGISTICAS WHERE ID_EVENTO = ?',[id],(err, rows, fields) =>{
     if(!err){
         callback(null, {
             success:true,
