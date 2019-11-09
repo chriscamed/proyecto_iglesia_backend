@@ -71,7 +71,7 @@ eventos.getEventoById = function(id,callback)
 	
     if (mysqlConnection) 
 	{    
-    mysqlConnection.query('SELECT * FROM eventos where ID_EVENTO = ?',[id],(err, rows, fields) =>{
+    mysqlConnection.query('SELECT ID_EVENTO, ID_TIPO_EVENTO, DATE_FORMAT(FECHA,'%Y-%m-%d') as FECHA, HORA_INICIO, HORA_FIN FROM eventos where ID_EVENTO = ?',[id],(err, rows, fields) =>{
         if(!err){
            
             callback(null, rows[0]);
