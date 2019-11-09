@@ -11,7 +11,7 @@ eventos.getEventos = function(callback)
 {
 	if (mysqlConnection) 
 	{
-		mysqlConnection.query("SELECT t.nombre, e.ID_EVENTO, e.ID_TIPO_EVENTO, DATE_FORMAT(e.FECHA,'%Y-%m-%d'), e.HORA_INICIO, e.HORA_FIN FROM EVENTOS e INNER JOIN TIPOS_EVENTOS t ON e.ID_TIPO_EVENTO = t.ID_TIPO_EVENTO ORDER BY FECHA DESC", function(error, rows) {
+		mysqlConnection.query("SELECT t.NOMBRE, e.ID_EVENTO, e.ID_TIPO_EVENTO, DATE_FORMAT(e.FECHA,'%Y-%m-%d') as FECHA, e.HORA_INICIO, e.HORA_FIN FROM EVENTOS e INNER JOIN TIPOS_EVENTOS t ON e.ID_TIPO_EVENTO = t.ID_TIPO_EVENTO ORDER BY FECHA DESC", function(error, rows) {
 			if(error)
 			{
 				throw error;
