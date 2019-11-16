@@ -68,7 +68,7 @@ logisticas.insertLogistica = function(logisticaData,callback)
 }
 
 //Metodo para borrar persona de logistica
-logisticas.updateLogistica = function(id, callback)
+logisticas.deleteLogistica = function(id, callback)
 {
     
     mysqlConnection.query('DELETE FROM LOGISTICAS WHERE ID_EVENTO = ?',[id],(err, rows, fields) =>{
