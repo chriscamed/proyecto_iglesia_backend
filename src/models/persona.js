@@ -223,7 +223,6 @@ personas.updatePersona = function(req, callback)
             ID_OCUPACION,
             ID_BARRIO,
             ID_PROFESION,
-            ESTADO,
             ID_MINISTERIO, ID_PERSONA],(err, rows, fields) =>{
         if(!err){
             callback(null, {
