@@ -1154,12 +1154,10 @@ router.get('/reportes/asistencias/ministerios/', checkAuth, function (request, r
 
 });
 
-
-
-router.get('/reportes/totalgeneros', checkAuth, function (request, response) {
+router.get('/reportes/asistenciasEventosTotales', checkAuth, function (request, response) {
   if (request.userData.roll == 1) {
 
-  reportesModel.getTotalGeneros( function (error, datos) {
+  reportesModel.getAsistenciasEventosTotales( function (error, datos) {
     if (datos) {
       response.status(200).json(datos);
     }
@@ -1178,6 +1176,53 @@ router.get('/reportes/totalgeneros', checkAuth, function (request, response) {
 }
 
 });
+
+router.get('/reportes/asistenciasEventosNombres', checkAuth, function (request, response) {
+  if (request.userData.roll == 1) {
+    const { id_evento} = request.query;
+  reportesModel.getAsistenciasEventosNombres( id_evento, function (error, datos) {
+    if (datos) {
+      response.status(200).json(datos);
+    }
+    else {
+      response.status(404).json({
+        "Mensaje": "No eventos"
+      });
+    }
+  });
+}else{
+  response.status(401).json(
+    {
+      message: 'No autorizado'
+    }
+  ) 
+}
+
+});
+
+router.get('/reportes/generoPorEvento', checkAuth, function (request, response) {
+  if (request.userData.roll == 1) {
+    const { id_evento} = request.query;
+  reportesModel.getAsistenciasGenero( id_evento, function (error, datos) {
+    if (datos) {
+      response.status(200).json(datos);
+    }
+    else {
+      response.status(404).json({
+        "Mensaje": "No eventos"
+      });
+    }
+  });
+}else{
+  response.status(401).json(
+    {
+      message: 'No autorizado'
+    }
+  ) 
+}
+
+});
+
 
 router.get('/reportes/asistenciapersona/', checkAuth, function (request, response) {
   if (request.userData.roll == 1) {

@@ -47,6 +47,81 @@ ON a.evento = b.evento;`
 
 }
 
+reportes.getAsistenciasEventosTotales = function(callback)
+{
+	
+    if (mysqlConnection) 
+	{    
+     let qr =`
+     SELECT get_full_name(P.ID_PERSONA) AS NOMBRE
+		FROM PERSONAS AS P 
+			JOIN ASISTENCIAS A ON A.ID_PERSONA = P.ID_PERSONA
+			JOIN EVENTOS AS E ON E.ID_EVENTO = A.ID_EVENTO
+		ORDER BY NOMBRE; 
+     `   
+    mysqlConnection.query(qr,(err, rows, fields) =>{
+        if(!err){
+           
+            callback(null, rows);
+        }else{
+            throw err;
+        }
+    });
+}
+
+}
+
+reportes.getAsistenciasEventosNombres = function(id_evento,callback)
+{
+	
+    if (mysqlConnection) 
+	{    
+     let qr =`
+     SELECT get_full_name(P.ID_PERSONA) AS NOMBRE
+		FROM PERSONAS AS P 
+			JOIN ASISTENCIAS A ON A.ID_PERSONA = P.ID_PERSONA
+			JOIN EVENTOS AS E ON E.ID_EVENTO = A.ID_EVENTO
+		WHERE E.ID_EVENTO = ?
+		ORDER BY NOMBRE; 
+     `   
+    mysqlConnection.query(qr,[id_evento],(err, rows, fields) =>{
+        if(!err){
+           
+            callback(null, rows);
+        }else{
+            throw err;
+        }
+    });
+}
+
+}
+
+reportes.getAsistenciasGenero = function(id_evento,callback)
+{
+	
+    if (mysqlConnection) 
+	{    
+     let qr =`
+     SELECT P.GENERO, COUNT(P.GENERO) AS TOTAL
+		FROM PERSONAS AS P 
+			JOIN ASISTENCIAS A ON A.ID_PERSONA = P.ID_PERSONA
+			JOIN EVENTOS AS E ON E.ID_EVENTO = A.ID_EVENTO
+		WHERE E.ID_EVENTO = ?
+			GROUP BY P.GENERO; 
+     `   
+    mysqlConnection.query(qr,[id_evento],(err, rows, fields) =>{
+        if(!err){
+           
+            callback(null, rows);
+        }else{
+            throw err;
+        }
+    });
+}
+
+}
+
+
 reportes.getAsistenciasMinisterioRpt = function(fechaInicio,fechaFin,callback)
 {
 	
