@@ -988,6 +988,7 @@ router.get('/asistencia/:id', checkAuth,function (request, response) {
     }
   });
 });
+
 //insertar asistencias
 router.post('/asistencia/crear',checkAuth, function (request, response) {
   if (request.userData.roll >= 1) {

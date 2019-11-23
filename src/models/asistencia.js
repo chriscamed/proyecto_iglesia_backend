@@ -43,27 +43,10 @@ asistencias.getAsistenciaById = function(id,callback)
 
 }
 
-//Añadir un nuevo asistencia
+//Crear asistencia
 asistencias.insertAsistencia = function(asistenciaData,callback)
 {
-    try{
-        if(asistenciaData.body.INVITADO_POR==0){
-            asistenciaData.body.INVITADO_POR=null;
-        }    
-    
-    }catch(e){
-
-    }
-    try{
-        if(asistenciaData.body.ASISTENTE==0){
-            asistenciaData.body.ASISTENTE=null;
-        }    
-    
-    }catch(e){
-
-    }
-
-    mysqlConnection.query('INSERT INTO asistencia SET ?', asistenciaData.body,(err, rows, fields) =>{
+    mysqlConnection.query('INSERT INTO ASISTENCIAS SET ?', asistenciaData.body,(err, rows, fields) =>{
         if(!err){
             callback(null, {
                 success: true,
